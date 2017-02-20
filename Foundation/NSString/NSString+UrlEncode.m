@@ -1,15 +1,15 @@
 //
 //  NSString+UrlEncode.h
-//  iOS-Categories (https://github.com/shaojiankui/iOS-Categories)
+//  JKCategories (https://github.com/shaojiankui/JKCategories)
 //
 //  Created by Jakey on 14/12/15.
 //  Copyright (c) 2014年 www.skyfox.org. All rights reserved.
 //
 
 
-#import "NSString+UrlEncode.h"
+#import "NSString+URLEncode.h"
 
-@implementation NSString (UrlEncode)
+@implementation NSString (URLEncode)
 /**
  *  @brief  urlEncode
  *
@@ -27,8 +27,8 @@
  */
 - (NSString *)urlEncodeUsingEncoding:(NSStringEncoding)encoding {
     return (__bridge_transfer NSString *)CFURLCreateStringByAddingPercentEscapes(NULL,
-                (__bridge CFStringRef)self,NULL,(CFStringRef)@"!*'\"();:@&=+$,/?%#[]% ",
-                 CFStringConvertNSStringEncodingToEncoding(encoding));
+                                                                                 (__bridge CFStringRef)self,NULL,(CFStringRef)@"!*'\"();:@&=+$,/?%#[]% ",
+                                                                                 CFStringConvertNSStringEncodingToEncoding(encoding));
 }
 /**
  *  @brief  urlDecode
@@ -46,8 +46,8 @@
  *  @return urlDecode 后的字符串
  */
 - (NSString *)urlDecodeUsingEncoding:(NSStringEncoding)encoding {
-	return (__bridge_transfer NSString *)CFURLCreateStringByReplacingPercentEscapesUsingEncoding(NULL,
-             (__bridge CFStringRef)self,CFSTR(""),CFStringConvertNSStringEncodingToEncoding(encoding));
+    return (__bridge_transfer NSString *)CFURLCreateStringByReplacingPercentEscapesUsingEncoding(NULL,
+                                                                                                 (__bridge CFStringRef)self,CFSTR(""),CFStringConvertNSStringEncodingToEncoding(encoding));
 }
 /**
  *  @brief  url query转成NSDictionary

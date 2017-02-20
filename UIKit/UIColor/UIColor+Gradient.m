@@ -1,9 +1,9 @@
 //
 //  UIColor+Gradient.m
-//  KID
+//  NULL
 //
-//  Created by KID on Future.
-//  Copyright © 2015年 KID. All rights reserved.
+//  Created by NULL on Future.
+//  Copyright © 2015年 NULL. All rights reserved.
 //
 
 #import "UIColor+Gradient.h"

@@ -1,12 +1,13 @@
 //
 //  UIScrollView+Addition.h
-//  iOS-Categories (https://github.com/shaojiankui/iOS-Categories)
+//  NULL
 //
-//  Created by Jakey on 14/12/30.
-//  Copyright (c) 2014年 www.skyfox.org. All rights reserved.
+//  Created by NULL on Future.
+//  Copyright © 2015年 NULL. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
+
 typedef NS_ENUM(NSInteger, ScrollDirection) {
     ScrollDirectionUp,
     ScrollDirectionDown,
@@ -16,6 +17,7 @@ typedef NS_ENUM(NSInteger, ScrollDirection) {
 };
 
 @interface UIScrollView (Addition)
+
 @property(nonatomic) CGFloat contentWidth;
 @property(nonatomic) CGFloat contentHeight;
 @property(nonatomic) CGFloat contentOffsetX;
@@ -32,6 +34,7 @@ typedef NS_ENUM(NSInteger, ScrollDirection) {
 - (BOOL)isScrolledToBottom;
 - (BOOL)isScrolledToLeft;
 - (BOOL)isScrolledToRight;
+
 - (void)scrollToTopAnimated:(BOOL)animated;
 - (void)scrollToBottomAnimated:(BOOL)animated;
 - (void)scrollToLeftAnimated:(BOOL)animated;
@@ -42,4 +45,5 @@ typedef NS_ENUM(NSInteger, ScrollDirection) {
 
 - (void)scrollToVerticalPageIndex:(NSUInteger)pageIndex animated:(BOOL)animated;
 - (void)scrollToHorizontalPageIndex:(NSUInteger)pageIndex animated:(BOOL)animated;
+
 @end

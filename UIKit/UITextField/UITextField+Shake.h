@@ -3,29 +3,32 @@
 //  UITextField+Shake
 //
 //  Created by Andrea Mazzini on 08/02/14.
-//  Copyright (c) 2014 Fancy Pixel. All rights reserved.
+//  Copyright (c) 2015 Fancy Pixel. All rights reserved.
+//
 
-//  https://github.com/andreamazz/UITextField-Shake
-//  UITextField category that adds shake animation
+#import <UIKit/UIKit.h>
 
-@import UIKit;
-
+/** @enum ShakeDirection
+ *
+ * Enum that specifies the direction of the shake
+ */
 typedef NS_ENUM(NSInteger, ShakeDirection) {
+    /** Shake left and right */
     ShakeDirectionHorizontal,
+    /** Shake up and down */
     ShakeDirectionVertical
 };
 
+/**
+ * @name UITextField+Shake
+ * A UITextField category that add the ability to shake the component
+ */
 @interface UITextField (Shake)
 
-/**-----------------------------------------------------------------------------
- * @name UITextField+Shake
- * -----------------------------------------------------------------------------
- */
-
 /** Shake the UITextField
-*
-* Shake the text field with default values
-*/
+ *
+ * Shake the text field with default values
+ */
 - (void)shake;
 
 /** Shake the UITextField
@@ -45,7 +48,7 @@ typedef NS_ENUM(NSInteger, ShakeDirection) {
  * @param delta The width of the shake
  * @param handler A block object to be executed when the shake sequence ends
  */
-- (void)shake:(int)times withDelta:(CGFloat)delta completion:(void((^)()))handler;
+- (void)shake:(int)times withDelta:(CGFloat)delta completion:(nullable void (^)(void))handler;
 
 /** Shake the UITextField at a custom speed
  *
@@ -66,7 +69,7 @@ typedef NS_ENUM(NSInteger, ShakeDirection) {
  * @param interval The duration of one shake
  * @param handler A block object to be executed when the shake sequence ends
  */
-- (void)shake:(int)times withDelta:(CGFloat)delta speed:(NSTimeInterval)interval completion:(void((^)()))handler;
+- (void)shake:(int)times withDelta:(CGFloat)delta speed:(NSTimeInterval)interval completion:(nullable void (^)(void))handler;
 
 /** Shake the UITextField at a custom speed
  *
@@ -89,6 +92,6 @@ typedef NS_ENUM(NSInteger, ShakeDirection) {
  * @param direction of the shake
  * @param handler A block object to be executed when the shake sequence ends
  */
-- (void)shake:(int)times withDelta:(CGFloat)delta speed:(NSTimeInterval)interval shakeDirection:(ShakeDirection)shakeDirection completion:(void((^)()))handler;
+- (void)shake:(int)times withDelta:(CGFloat)delta speed:(NSTimeInterval)interval shakeDirection:(ShakeDirection)shakeDirection completion:(nullable void (^)(void))handler;
 
 @end

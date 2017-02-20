@@ -10,6 +10,17 @@
 
 @implementation NSTimer (Addition)
 /**
+ *  @brief  停止NSTimer
+ */
+-(void)stopTimer
+{
+    if (![self isValid]) {
+        return ;
+    }
+    [self invalidate];
+}
+
+/**
  *  @brief  暂停NSTimer
  */
 -(void)pauseTimer

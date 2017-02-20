@@ -25,9 +25,6 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-// https://github.com/bachonk/UIImageView-Letters
-// UIImageView category for using initials as a placeholder image
-
 #import <UIKit/UIKit.h>
 
 @interface UIImageView (Letters)

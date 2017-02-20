@@ -1,25 +1,28 @@
 //
 //  UIWindow+Hierarchy.h
-//  iOS-Categories (https://github.com/shaojiankui/iOS-Categories)
+//  NULL
 //
-//  Created by Jakey on 15/1/16.
-//  Copyright (c) 2015年 www.skyfox.org. All rights reserved.
+//  Created by NULL on Future.
+//  Copyright © 2015年 NULL. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
 
 @interface UIWindow (Hierarchy)
-/*!
- @method topMostController
- 
- @return Returns the current Top Most ViewController in hierarchy.
- */
-- (UIViewController*) topMostController;
 
-/*!
- @method currentViewController
- 
- @return Returns the topViewController in stack of topMostController.
+/**
+ *  @brief  寻找窗口中的顶层视图对象
+ *
+ *  @return 返回视图对象
  */
-- (UIViewController*)currentViewController;
+- (UIViewController *)topViewController;
+
+/**
+ *  @brief  寻找窗口中的当前视图对象
+ *
+ *  @return 返回视图对象
+ */
+- (UIViewController *)currentViewController;
+
 @end
+

@@ -1,9 +1,9 @@
 //
 //  UIButton+BackgroundColor.m
-//  KID
+//  NULL
 //
-//  Created by KID on Future.
-//  Copyright © 2015年 KID. All rights reserved.
+//  Created by NULL on Future.
+//  Copyright © 2015年 NULL. All rights reserved.
 //
 
 #import "UIButton+BackgroundColor.h"
@@ -37,7 +37,6 @@
     UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
     return image;
-    
 }
 
 @end

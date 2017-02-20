@@ -1,50 +1,56 @@
 //
 //  UINavigationController+StackManager.h
-//  iOS-Categories (https://github.com/shaojiankui/iOS-Categories)
+//  NULL
 //
-//  Created by Jakey on 15/4/25.
-//  Copyright (c) 2015年 www.skyfox.org. All rights reserved.
+//  Created by NULL on Future.
+//  Copyright © 2015年 NULL. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
 
 @interface UINavigationController (StackManager)
+
 /**
- *  @brief  寻找Navigation中的某个viewcontroler对象
+ *  @brief  寻找导航控制器中的某个视图控制器对象
  *
- *  @param className viewcontroler名称
+ *  @param  Class 视图控制器类名
  *
- *  @return viewcontroler对象
+ *  @return 返回视图控制器对象
  */
-- (id)findViewController:(NSString*)className;
+- (id)findViewController:(NSString *)Class;
+
 /**
- *  @brief  判断是否只有一个RootViewController
+ *  @brief  判断是否只有一个视图控制器
  *
- *  @return 是否只有一个RootViewController
+ *  @return 返回是否只有一个视图控制器
  */
 - (BOOL)isOnlyContainRootViewController;
+
 /**
- *  @brief  RootViewController
+ *  @brief  返回根视图控制器
  *
- *  @return RootViewController
+ *  @return 返回根视图控制器
  */
 - (UIViewController *)rootViewController;
+
 /**
- *  @brief  返回指定的viewcontroler
+ *  @brief  返回指定类名的视图控制器
  *
- *  @param className 指定viewcontroler类名
- *  @param animated  是否动画
+ *  @param  class    指定类名
+ *  @param  animated 是否动画
  *
- *  @return pop之后的viewcontrolers
+ *  @return 返回之后的视图控制器
  */
-- (NSArray *)popToViewControllerWithClassName:(NSString*)className animated:(BOOL)animated;
+- (NSArray *)popToViewControllerWithClass:(NSString*)Class animated:(BOOL)animated;
+
 /**
- *  @brief  pop n层
+ *  @brief  返回指定层级的视图控制器
  *
- *  @param level  n层
- *  @param animated  是否动画
+ *  @param  level    指定层级
+ *  @param  animated 是否动画
  *
- *  @return pop之后的viewcontrolers
+ *  @return 返回之后的视图控制器
  */
-- (NSArray *)popToViewControllerWithLevel:(NSInteger)level animated:(BOOL)animated;
+- (NSArray *)popToViewControllerWithLevel:(NSInteger)Level animated:(BOOL)animated;
+
 @end

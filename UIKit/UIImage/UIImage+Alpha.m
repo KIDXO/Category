@@ -2,20 +2,18 @@
 // Created by Trevor Harmon on 9/20/09.
 // Free for personal or commercial use, with or without modification.
 // No warranty is expressed or implied.
+// Modified by Albert Tong : https://github.com/AlbertTong/UIImageCategoriesTrevorHarmon
 
 #import "UIImage+Alpha.h"
 
 // Private helper methods
-@interface UIImage (AlphaPrivateMethods)
+@interface UIImage (private)
 - (CGImageRef)newBorderMask:(NSUInteger)borderSize size:(CGSize)size;
 @end
 
 @implementation UIImage (Alpha)
-/**
- *  @brief  是否有alpha通道
- *
- *  @return 是否有alpha通道
- */
+
+// Returns true if the image has an alpha layer
 - (BOOL)hasAlpha {
     CGImageAlphaInfo alpha = CGImageGetAlphaInfo(self.CGImage);
     return (alpha == kCGImageAlphaFirst ||
@@ -23,11 +21,8 @@
             alpha == kCGImageAlphaPremultipliedFirst ||
             alpha == kCGImageAlphaPremultipliedLast);
 }
-/**
- *  @brief  如果没有alpha通道 增加alpha通道
- *
- *  @return 如果没有alpha通道 增加alpha通道
- */
+
+// Returns a copy of the given image, adding an alpha channel if it doesn't already have one
 - (UIImage *)imageWithAlpha {
     if ([self hasAlpha]) {
         return self;
@@ -60,13 +55,6 @@
 
 // Returns a copy of the image with a transparent border of the given size added around its edges.
 // If the image has no alpha layer, one will be added to it.
-/**
- *  @brief  增加透明边框
- *
- *  @param borderSize 边框尺寸
- *
- *  @return 增加透明边框后的图片
- */
 - (UIImage *)transparentBorderImage:(NSUInteger)borderSize {
     // If the image does not have an alpha layer, add one
     UIImage *image = [self imageWithAlpha];
@@ -100,101 +88,7 @@
     
     return transparentBorderImage;
 }
-/**
- *  @brief  裁切含透明图片为最小大小
- *
- *  @return 裁切后的图片
- */
-- (UIImage *)trimmedBetterSize {
-    
-    CGImageRef inImage = self.CGImage;
-    CFDataRef m_DataRef;
-    m_DataRef = CGDataProviderCopyData(CGImageGetDataProvider(inImage));
-    
-    UInt8 * m_PixelBuf = (UInt8 *) CFDataGetBytePtr(m_DataRef);
-    
-//    size_t width = CGImageGetWidth(inImage);
-//    size_t height = CGImageGetHeight(inImage);
-    CGFloat width = CGImageGetWidth(inImage);
-    CGFloat height = CGImageGetHeight(inImage);
-    CGPoint top,left,right,bottom;
-    
-    BOOL breakOut = NO;
-    for (int x = 0;breakOut==NO && x < width; x++) {
-        for (int y = 0; y < height; y++) {
-            int loc = x + (y * width);
-            loc *= 4;
-            if (m_PixelBuf[loc + 3] != 0) {
-                left = CGPointMake(x, y);
-                breakOut = YES;
-                break;
-            }
-        }
-    }
-    
-    breakOut = NO;
-    for (int y = 0;breakOut==NO && y < height; y++) {
-        
-        for (int x = 0; x < width; x++) {
-            
-            int loc = x + (y * width);
-            loc *= 4;
-            if (m_PixelBuf[loc + 3] != 0) {
-                top = CGPointMake(x, y);
-                breakOut = YES;
-                break;
-            }
-            
-        }
-    }
-    
-    breakOut = NO;
-    for (int y = height-1;breakOut==NO && y >= 0; y--) {
-        
-        for (int x = width-1; x >= 0; x--) {
-            
-            int loc = x + (y * width);
-            loc *= 4;
-            if (m_PixelBuf[loc + 3] != 0) {
-                bottom = CGPointMake(x, y);
-                breakOut = YES;
-                break;
-            }
-            
-        }
-    }
-    
-    breakOut = NO;
-    for (int x = width-1;breakOut==NO && x >= 0; x--) {
-        
-        for (int y = height-1; y >= 0; y--) {
-            
-            int loc = x + (y * width);
-            loc *= 4;
-            if (m_PixelBuf[loc + 3] != 0) {
-                right = CGPointMake(x, y);
-                breakOut = YES;
-                break;
-            }
-            
-        }
-    }
-    
-    
-    CGFloat scale = self.scale;
-    
-    CGRect cropRect = CGRectMake(left.x / scale, top.y/scale, (right.x - left.x)/scale, (bottom.y - top.y) / scale);
-    UIGraphicsBeginImageContextWithOptions( cropRect.size,
-                                           NO,
-                                           scale);
-    [self drawAtPoint:CGPointMake(-cropRect.origin.x, -cropRect.origin.y)
-            blendMode:kCGBlendModeCopy
-                alpha:1.];
-    UIImage *croppedImage = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
-    CFRelease(m_DataRef);
-    return croppedImage;
-}
+
 #pragma mark -
 #pragma mark Private helper methods
 

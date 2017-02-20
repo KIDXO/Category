@@ -1,7 +1,7 @@
 //
 //  UIImage+FX.m
 //
-//  Version 1.2.3
+//  Version 1.3.5
 //
 //  Created by Nick Lockwood on 31/10/2011.
 //  Copyright (c) 2011 Charcoal Design
@@ -31,6 +31,10 @@
 //
 
 #import "UIImage+FX.h"
+
+
+#pragma GCC diagnostic ignored "-Wconversion"
+
 
 @implementation UIImage (FX)
 
@@ -106,7 +110,7 @@
 
 - (UIImage *)imageCroppedAndScaledToSize:(CGSize)size
                              contentMode:(UIViewContentMode)contentMode
-                                padToFit:(BOOL)padToFit;
+                                padToFit:(BOOL)padToFit
 {
     //calculate rect
     CGRect rect = CGRectZero;
@@ -182,8 +186,9 @@
         {
             rect = CGRectMake(size.width - self.size.width, size.height - self.size.height, self.size.width, self.size.height);
             break;
-        }  
-        default:
+        }
+        case UIViewContentModeRedraw:
+        case UIViewContentModeScaleToFill:
         {
             rect = CGRectMake(0.0f, 0.0f, size.width, size.height);
             break;
@@ -301,9 +306,7 @@
 - (UIImage *)imageWithShadowColor:(UIColor *)color offset:(CGSize)offset blur:(CGFloat)blur
 {
     //get size
-    //CGSize border = CGSizeMake(fabsf(offset.width) + blur, fabsf(offset.height) + blur);
     CGSize border = CGSizeMake(fabs(offset.width) + blur, fabs(offset.height) + blur);
-
     CGSize size = CGSizeMake(self.size.width + border.width * 2.0f, self.size.height + border.height * 2.0f);
     
     //create drawing context
@@ -328,20 +331,9 @@
 {
     //create drawing context
 	UIGraphicsBeginImageContextWithOptions(self.size, NO, 0.0f);
-    CGContextRef context = UIGraphicsGetCurrentContext();
     
     //clip image
-    CGContextBeginPath(context);
-    CGContextMoveToPoint(context, 0.0f, radius);
-    CGContextAddLineToPoint(context, 0.0f, self.size.height - radius);
-    CGContextAddArc(context, radius, self.size.height - radius, radius, M_PI, M_PI / 2.0f, 1);
-    CGContextAddLineToPoint(context, self.size.width - radius, self.size.height);
-    CGContextAddArc(context, self.size.width - radius, self.size.height - radius, radius, M_PI / 2.0f, 0.0f, 1);
-    CGContextAddLineToPoint(context, self.size.width, radius);
-    CGContextAddArc(context, self.size.width - radius, radius, radius, 0.0f, -M_PI / 2.0f, 1);
-    CGContextAddLineToPoint(context, radius, 0.0f);
-    CGContextAddArc(context, radius, radius, radius, -M_PI / 2.0f, M_PI, 1);
-    CGContextClip(context);
+    [[UIBezierPath bezierPathWithRoundedRect:CGRectMake(0, 0, self.size.width, self.size.height) cornerRadius:radius] addClip];
     
     //draw image
     [self drawAtPoint:CGPointZero];
@@ -370,7 +362,7 @@
 	return image;
 }
 
-- (UIImage *)imageWithMask:(UIImage *)maskImage;
+- (UIImage *)imageWithMask:(UIImage *)maskImage
 {
     //create drawing context
     UIGraphicsBeginImageContextWithOptions(self.size, NO, 0.0f);
@@ -398,17 +390,17 @@
     
     //create alpha image
     NSInteger bytesPerRow = ((width + 3) / 4) * 4;
-    void *data = calloc(bytesPerRow * height, sizeof(unsigned char *));
-    CGContextRef context = CGBitmapContextCreate(data, width, height, 8, bytesPerRow, NULL, kCGImageAlphaOnly);
+    uint8_t *data = (uint8_t *)malloc(bytesPerRow * height);
+    CGContextRef context = CGBitmapContextCreate(data, width, height, 8, bytesPerRow, NULL, (CGBitmapInfo)kCGImageAlphaOnly);
     CGContextDrawImage(context, CGRectMake(0.0f, 0.0f, width, height), self.CGImage);
     
     //invert alpha pixels
-    for (int y = 0; y < height; y++)
+    for (NSInteger y = 0; y < height; y++)
     {
-        for (int x = 0; x < width; x++)
+        for (NSInteger x = 0; x < width; x++)
         {
             NSInteger index = y * bytesPerRow + x;
-            ((unsigned char *)data)[index] = 255 - ((unsigned char *)data)[index];
+            data[index] = 255 - data[index];
         }
     }
     

@@ -21,7 +21,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 //
-// https://github.com/devxoul/UINavigationItem-Margin
+
 #import <UIKit/UIKit.h>
 
 FOUNDATION_EXPORT double UINavigationItem_MarginVersionNumber;

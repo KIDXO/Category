@@ -1,19 +1,20 @@
 //
 //  UINavigationItem+Lock.m
-//  iOS-Categories (https://github.com/shaojiankui/iOS-Categories)
+//  NULL
 //
-//  Created by Jakey on 15/5/22.
-//  Copyright (c) 2015年 www.skyfox.org. All rights reserved.
+//  Created by NULL on Future.
+//  Copyright © 2015年 NULL. All rights reserved.
 //
 
 #import "UINavigationItem+Lock.h"
 
 @implementation UINavigationItem (Lock)
-- (void)lockRightItem:(BOOL)lock
+
+- (void)lockLeftItem:(BOOL)lock
 {
-    NSArray *rightBarItems = self.rightBarButtonItems;
-    if (rightBarItems  && [rightBarItems count]>0) {
-        [rightBarItems enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+    NSArray *items = self.leftBarButtonItems;
+    if (items && items.count > 0) {
+        [items enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
             if ([obj isKindOfClass:[UIBarButtonItem class]] ||
                 [obj isMemberOfClass:[UIBarButtonItem class]])
             {
@@ -24,11 +25,11 @@
     }
 }
 
-- (void)lockLeftItem:(BOOL)lock
+- (void)lockRightItem:(BOOL)lock
 {
-    NSArray *leftBarItems = self.leftBarButtonItems;
-    if (leftBarItems  && [leftBarItems count]>0) {
-        [leftBarItems enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+    NSArray *items = self.rightBarButtonItems;
+    if (items && items.count > 0) {
+        [items enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
             if ([obj isKindOfClass:[UIBarButtonItem class]] ||
                 [obj isMemberOfClass:[UIBarButtonItem class]])
             {

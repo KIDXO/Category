@@ -1,21 +1,15 @@
 //
 //  NSDictionary+URL.m
-//  IOS-Categories
+//  NULL
 //
-//  Created by Jakey on 15/8/7.
-//  Copyright © 2015年 www.skyfox.org. All rights reserved.
+//  Created by NULL on Future.
+//  Copyright © 2015年 NULL. All rights reserved.
 //
 
 #import "NSDictionary+URL.h"
 
 @implementation NSDictionary (URI)
-/**
- *  @brief  将url参数转换成NSDictionary
- *
- *  @param query url参数
- *
- *  @return NSDictionary
- */
+
 + (NSDictionary *)dictionaryWithURLQuery:(NSString *)query
 {
     NSMutableDictionary *dict = [NSMutableDictionary dictionary];
@@ -33,11 +27,7 @@
     }
     return [NSDictionary dictionaryWithDictionary:dict];
 }
-/**
- *  @brief  将NSDictionary转换成url 参数字符串
- *
- *  @return url 参数字符串
- */
+
 - (NSString *)URLQueryString 
 {
     NSMutableString *string = [NSMutableString string];
@@ -53,4 +43,5 @@
     }
     return string;
 }
+
 @end

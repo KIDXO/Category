@@ -1,19 +1,15 @@
 //
 //  NSURL+Param.m
-//  iOS-Categories (https://github.com/shaojiankui/iOS-Categories)
+//  NULL
 //
-//  Created by Jakey on 14/12/30.
-//  Copyright (c) 2014年 www.skyfox.org. All rights reserved.
+//  Created by NULL on Future.
+//  Copyright © 2015年 NULL. All rights reserved.
 //
 
 #import "NSURL+Param.h"
 
 @implementation NSURL (Param)
-/**
- *  @brief  url参数转字典
- *
- *  @return 参数转字典结果
- */
+
 - (NSDictionary *)parameters
 {
     NSMutableDictionary * parametersDictionary = [NSMutableDictionary dictionary];
@@ -25,15 +21,10 @@
     }
     return parametersDictionary;
 }
-/**
- *  @brief  根据参数名 取参数值
- *
- *  @param parameterKey 参数名的key
- *
- *  @return 参数值
- */
+
 - (NSString *)valueForParameter:(NSString *)parameterKey
 {
     return [[self parameters] objectForKey:parameterKey];
 }
+
 @end

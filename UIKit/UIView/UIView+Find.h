@@ -1,41 +1,44 @@
 //
 //  UIView+Find.h
-//  iOS-Categories (https://github.com/shaojiankui/iOS-Categories)
+//  NULL
 //
-//  Created by Jakey on 15/4/25.
-//  Copyright (c) 2015年 www.skyfox.org. All rights reserved.
+//  Created by NULL on Future.
+//  Copyright © 2015年 NULL. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
 
 @interface UIView (Find)
 /**
- *  @brief  找到指定类名的SubVie对象
+ *  @brief  寻找视图中某个指定类名的子视图对象
  *
- *  @param clazz SubVie类名
+ *  @param  Class 视图类名
  *
- *  @return view对象
+ *  @return 返回视图对象
  */
-- (id)findSubViewWithSubViewClass:(Class)clazz;
-/**
- *  @brief  找到指定类名的SuperView对象
- *
- *  @param clazz SuperView类名
- *
- *  @return view对象
- */
-- (id)findSuperViewWithSuperViewClass:(Class)clazz;
+- (id)findSubView:(Class)Class;
 
 /**
- *  @brief  找到并且resign第一响应者
+ *  @brief  寻找视图中某个指定类名的父视图对象
  *
- *  @return 结果
+ *  @param  Class 视图类名
+ *
+ *  @return 返回视图对象
  */
-- (BOOL)findAndResignFirstResponder;
+- (id)findSuperView:(Class)Class;
+
 /**
- *  @brief  找到第一响应者
+ *  @brief  寻找第一响应者
  *
  *  @return 第一响应者
  */
 - (UIView *)findFirstResponder;
+
+/**
+ *  @brief  寻找第一响应者并且失去焦点
+ *
+ *  @return 是否失去焦点
+ */
+- (BOOL)findAndResignFirstResponder;
+
 @end
